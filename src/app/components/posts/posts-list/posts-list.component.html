@@ -1,0 +1,19 @@
+<div>
+    <h1>Posts list</h1>
+    <button [routerLink]="['new']">Add post</button>
+    <br />
+    @if (isLoading()) {
+        <strong>LOADING...</strong>
+    } @else {
+        <ul>
+            @for (post of posts(); track post.id; let i = $index) {
+            <li>
+                ID: {{ post.id }}
+                Title: {{ post.title }}
+                <button [routerLink]="[post.id, 'edit']">Edit</button>
+                <button (click)="deletePost(post)">Delete</button>
+            </li>
+            }
+        </ul>
+    }
+</div>

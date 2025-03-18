@@ -1,0 +1,13 @@
+@if (isLoading()) {
+    <strong>LOADING...</strong>
+} @else {
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <label for="title">Title:</label>
+        <input id="title" formControlName="title" required>
+    
+        <label for="body">Body:</label>
+        <textarea id="body" formControlName="body" required></textarea>
+    
+        <button type="submit" class="submit-button">{{ post() ? 'Edit' : 'Add' }}</button>
+    </form>
+}
