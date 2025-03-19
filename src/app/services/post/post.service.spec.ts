@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { PostService } from './post.service';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { Post } from '../../models/post/post';
 
 describe('PostService', () => {
   let service: PostService;
@@ -80,9 +81,10 @@ describe('PostService', () => {
       title: "Nowy post",
       body: "Treść nowego posta"
     };
+    const response: Post = { ...newPost, id: 1 };
 
     service.createPost(newPost).subscribe((res) => {
-      expect(res).toEqual(newPost);
+      expect(res).toEqual(response);
     });
 
     const req = httpController.expectOne({
@@ -90,7 +92,7 @@ describe('PostService', () => {
       url: `https://jsonplaceholder.typicode.com/posts`,
     });
 
-    req.flush(newPost);
+    req.flush(response);
   });
 
   it('powinien poprawnie wywołać metodę updatePost', () => {
