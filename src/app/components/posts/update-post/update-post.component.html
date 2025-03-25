@@ -2,12 +2,41 @@
     <strong>LOADING...</strong>
 } @else {
     <form [formGroup]="form" (ngSubmit)="submit()">
-        <label for="title">Title:</label>
-        <input id="title" formControlName="title" required>
+        <div class="mb-3">
+            <label for="title">Title:</label>
+            <input 
+                data-test="form-title" 
+                [ngClass]="{
+                    'is-invalid': form.get('title')?.invalid && form.get('title')?.touched,
+                    'is-valid': form.get('title')?.valid && form.get('title')?.touched
+                }"
+                id="title" 
+                formControlName="title" 
+                required>
+            <div data-test="form-title-invalid-feedback" class="invalid-feedback">Please enter a valid title.</div>
+            <div data-test="form-title-valid-feedback" class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="body">Body:</label>
+            <textarea 
+                data-test="form-body" 
+                [ngClass]="{
+                    'is-invalid': form.get('body')?.invalid && form.get('body')?.touched,
+                    'is-valid': form.get('body')?.valid && form.get('body')?.touched
+                }"
+                id="body" 
+                formControlName="body" 
+                required></textarea>
+            <div data-test="form-body-invalid-feedback" class="invalid-feedback">Please enter a valid body.</div>
+            <div data-test="form-body-valid-feedback" class="valid-feedback">Looks good!</div>
+        </div>
     
-        <label for="body">Body:</label>
-        <textarea id="body" formControlName="body" required></textarea>
-    
-        <button type="submit" class="submit-button">{{ post() ? 'Edit' : 'Add' }}</button>
+        <button data-test="submit-button" type="submit" class="submit-button">{{ post() ? 'Edit' : 'Add' }}</button>
     </form>
+
+    <!-- Dorób tutaj walidację by testować czy pojawia się błąd czy jest ok. -->
+    <!-- 
+    https://learn.cypress.io/testing-your-first-application/how-to-test-forms-and-custom-cypress-commands
+    -->
 }

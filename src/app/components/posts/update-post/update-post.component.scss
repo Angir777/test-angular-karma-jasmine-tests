@@ -1,50 +1,83 @@
 form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: calc(100% - 16px); // Zapobiega wychodzeniu poza obramowanie
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background: white;
+  box-sizing: border-box; // Gwarantuje, że padding nie powiększa elementu
+}
+
+textarea {
+  resize: vertical; // Pozwala użytkownikowi rozszerzać pole tekstowe
+  min-height: 80px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 100%; // Przycisk dopasowany do szerokości formularza
+
+  &:hover {
+    background-color: #0056b3;
   }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input, textarea {
-    width: calc(100% - 16px); // Zapobiega wychodzeniu poza obramowanie
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background: white;
-    box-sizing: border-box; // Gwarantuje, że padding nie powiększa elementu
-  }
-  
-  textarea {
-    resize: vertical; // Pozwala użytkownikowi rozszerzać pole tekstowe
-    min-height: 80px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    width: 100%; // Przycisk dopasowany do szerokości formularza
-  
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
-  
+}
+
+// Walidacja
+.is-invalid {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+.is-valid {
+  border: 1px solid green;
+  background-color: #e6ffe6;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.valid-feedback {
+  color: green;
+  font-size: 0.875rem;
+  display: none;
+}
+
+/* Pokaż komunikaty, gdy odpowiednia klasa jest aktywna */
+input.is-invalid ~ .invalid-feedback,
+textarea.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+input.is-valid ~ .valid-feedback,
+textarea.is-valid ~ .valid-feedback {
+  display: block;
+}

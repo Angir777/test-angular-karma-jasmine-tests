@@ -3,12 +3,13 @@ import { PostService } from '../../../services/post/post.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post } from '../../../models/post/post';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-post',
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './update-post.component.html',
   styleUrl: './update-post.component.scss'
 })
@@ -41,11 +42,11 @@ export class UpdatePostComponent {
   }
 
   createForm() {
-    this.form = this.formBuilder.group({
-      id: [null],
-      title: [null],
-      body: [null],
-      userId: [null],
+    this.form = new FormGroup({
+      id: new FormControl(null, []),
+      title: new FormControl(null, [Validators.required]),
+      body: new FormControl(null, [Validators.required]),
+      userId: new FormControl(null, []),
     });
   }
 
@@ -77,6 +78,11 @@ export class UpdatePostComponent {
   }
 
   submit() {
+    if (!this.form.valid) {
+      this.validateAllFormFields(this.form);
+      return;
+    }
+
     const dataToSave: Post = {
       id: this.post()?.id ?? null,
       title: this.form.get(['title'])!.value,
@@ -129,4 +135,17 @@ export class UpdatePostComponent {
         },
       });
   }
+
+  // The function forces errors to be displayed in all form fields.
+  validateAllFormFields = (formGroup: FormGroup): void => {
+    Object.keys(formGroup.controls).forEach((field: string) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  };
+
 }
