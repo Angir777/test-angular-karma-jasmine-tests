@@ -12,3 +12,6 @@
 2. Uruchomienie testów: 
 Najpierw uruchamiamy apliakcje: npm start    
 Nastepnie odpalamy testy: npm run cypress:open  lub  npm run cypress:run
+3. Ciekawsze zagadnienia: 
+https://learn.cypress.io/cypress-fundamentals/waiting-and-retry-ability
+https://learn.cypress.io/cypress-fundamentals/how-to-debug-failing-tests

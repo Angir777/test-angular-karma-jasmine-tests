@@ -22,6 +22,10 @@ describe('My Form Test', () => {
     cy.getByData("form-title").type("Tytuł posta")
     cy.getByData("form-body").type("Treść posta")
 
+    // Weryfikujemy czy formularz ma faktycznie wpisane dane
+    cy.getByData("form-title").should('have.value', 'Tytuł posta')
+    cy.getByData("form-body").should('have.value', 'Treść posta')
+
     // Kliknięcie submit po poprawnym uzupełnieniu
     cy.getByData("submit-button").click()
 
