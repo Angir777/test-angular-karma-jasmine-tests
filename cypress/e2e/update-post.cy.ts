@@ -88,7 +88,7 @@ describe('HTTP Test', () => {
 
     // Sprawdza to, co aplikacja wysłała do API, a nie to, co API zwróciło.
     cy.wait('@updatePost')
-      .its('request.body')
+      .its('request.body') // .its()jest przydatną metodą, gdy chcesz uzyskać właściwość z czegoś. tu z @updatePost
       .should('deep.include', { id: 1, title: 'Updated Post', body: 'Updated Content' });
 
     // Jak podejrzeć odpowiedź API w Cypress?

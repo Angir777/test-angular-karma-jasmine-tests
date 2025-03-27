@@ -34,7 +34,7 @@ describe('My Second Test', () => {
       cy.getByData("post-title-0").should('exist')
 
       // Klikamy "Delete" tylko w tym konkretnym poście
-      cy.getByData("post-title-0").within(() => {
+      cy.getByData("post-title-0").within(() => { // Podczas pracy z elementami musisz przejść do jego dzieci, wnuków itd. Możesz użyć .within(), aby ograniczyć zakres poleceń Cypress do określonego elementu.
         cy.contains("Delete").click()
       })
 

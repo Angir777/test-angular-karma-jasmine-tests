@@ -16,3 +16,4 @@ Nastepnie odpalamy testy: npm run cypress:open  lub  npm run cypress:run
 - https://learn.cypress.io/cypress-fundamentals/waiting-and-retry-ability
 - https://learn.cypress.io/cypress-fundamentals/how-to-debug-failing-tests
 - https://learn.cypress.io/advanced-cypress-concepts/intercepting-network-requests
+- https://learn.cypress.io/advanced-cypress-concepts/how-to-test-various-browsers-and-viewports
